@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bài 2 - Đăng ký tài khoản</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header><h1>Đăng ký tài khoản</h1></header>
@@ -38,50 +38,5 @@
   </div>
 
   <script src="js/script.js"></script>
-  <script>
-    const form = document.getElementById('registerForm');
-    const successMsg = document.getElementById('successMsg');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const agree = document.getElementById('agree').checked;
-
-      // Reset lỗi
-      document.querySelectorAll('.error-text').forEach(el => el.textContent = '');
-
-      // Validate email
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        document.getElementById('emailError').textContent = 'Email không hợp lệ';
-        return;
-      }
-
-      // Validate password
-      const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-      if (!passRegex.test(password)) {
-        document.getElementById('passError').textContent = 
-          'Mật khẩu ít nhất 8 ký tự, có chữ hoa, thường và số';
-        return;
-      }
-
-      if (!agree) {
-        alert('Bạn phải đồng ý với điều khoản!');
-        return;
-      }
-
-      // Lưu vào LocalStorage (không mã hóa - chỉ demo)
-      const user = { name, email, password }; // Lưu ý: thực tế KHÔNG lưu mật khẩu plain text
-      localStorage.setItem('user', JSON.stringify(user));
-
-      successMsg.style.display = 'block';
-      form.reset();
-      setTimeout(() => successMsg.style.display = 'none', 5000);
-    });
-  </script>
 </body>
-
 </html>
