@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liên hệ - 707-231A010878</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Liên hệ</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Trang chủ</a> |
+    <a href="baitap01.html">Bài 1</a> |
+    <a href="baitap02.html">Bài 2</a> |
+    <a href="baitap03.html">Bài 3</a> |
+    <a href="about.html">Giới thiệu</a> |
+    <a href="contact.html">Liên hệ</a>
+  </nav>
+
+  <div class="container">
+    <div class="contact-content">
+      <h2>Thông tin liên hệ</h2>
+      
+      <div class="contact-info">
+        <p><strong>Họ tên:</strong> Trương Đỗ Thùy Ngân</p>
+        <p><strong>MSSV:</strong> 2012345</p>
+        <p><strong>Email:</strong> <a href="nganthuydotruong@gmail.com">nganthuydotruong@gmail.com</a><p>
+        <p><strong>Điện thoại:</strong> 032.687.329</p>
+      </div>
+
+      <h2 style="margin-top: 40px;">Hoặc gửi tin nhắn trực tiếp</h2>
+      <form id="contactForm" class="form-container" style="max-width: 600px;">
+        <div class="form-group">
+          <label>Họ tên</label>
+          <input type="text" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" required />
+        </div>
+        <div class="form-group">
+          <label>Tin nhắn</label>
+          <textarea rows="5" required placeholder="Viết gì đó gửi mình nè..."></textarea>
+        </div>
+        <button type="submit">Gửi tin nhắn</button>
+      </form>
+
+      <div id="contactSuccess" class="success" style="display:none; margin-top:20px;">
+        Cảm ơn bạn! Tin nhắn đã được gửi (demo).
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('contactSuccess').style.display = 'block';
+      this.reset();
+      setTimeout(() => {
+        document.getElementById('contactSuccess').style.display = 'none';
+      }, 4000);
+    });
+  </script>
+</body>
+</html>

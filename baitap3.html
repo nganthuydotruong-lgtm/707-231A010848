@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bài 3 - Đồng hồ đếm ngược</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header><h1>Đồng hồ đếm ngược</h1></header>
+  <nav><a href="index.html">← Trang chủ</a></nav>
+
+  <div class="container timer-container">
+    <div id="timer" class="timer">10:00</div>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <div id="modal" class="modal" style="display:none">
+    <div class="modal-content">
+      <h2>⏰ Hết giờ!</h2>
+      <button onclick="document.getElementById('modal').style.display='none'">Đóng</button>
+    </div>
+  </div>
+
+  <script>
+    let timeLeft = 10 * 60; // 10 phút
+    let timerId = null;
+    const timerDisplay = document.getElementById('timer');
+    const modal = document.getElementById('modal');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function updateDisplay() {
+      const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+      const seconds = (timeLeft % 60).toString().padStart(2, '0');
+      timerDisplay.textContent = `${minutes}:${seconds}`;
+
+      if (timeLeft < 60) {
+        timerDisplay.classList.add('urgent');
+      } else {
+        timerDisplay.classList.remove('urgent');
+      }
+
+      if (timeLeft <= 0) {
+        clearInterval(timerId);
+        timerId = null;
+        modal.style.display = 'flex';
+      }
+    }
+
+    function startTimer() {
+      if (timerId) return;
+      timerId = setInterval(() => {
+        timeLeft--;
+        updateDisplay();
+      }, 1000);
+    }
+
+    resetBtn.addEventListener('click', () => {
+      clearInterval(timerId);
+      timerId = null;
+      timeLeft = 10 * 60;
+      timerDisplay.classList.remove('urgent');
+      updateDisplay();
+      modal.style.display = 'none';
+      startTimer();
+    });
+
+    // Bắt đầu tự động
+    startTimer();
+    updateDisplay();
+  </script>
+</body>
+</html>

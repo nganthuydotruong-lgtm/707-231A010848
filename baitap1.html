@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bài 1 - Danh sách sản phẩm</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header><h1>Danh sách sản phẩm</h1></header>
+  <nav><a href="index.html">← Trang chủ</a></nav>
+
+  <div class="container">
+    <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." />
+    <div id="productList" class="grid"></div>
+    <p id="notFound" class="error" style="display:none">Không tìm thấy sản phẩm nào!</p>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    const products = [
+      { id: 1, name: "Laptop Dell XPS 13", price: 25000000, img: "https://microless.com/cdn/products/f026b0f0fb6302d095eda73e25215408-hi.jpg" },
+      { id: 2, name: "iPhone 15 Pro", price: 30000000, img: "https://static1.pocketnowimages.com/wordpress/wp-content/uploads/2023/09/pbi-iphone-15-pro.png" },
+      { id: 3, name: "Tai nghe Sony WH-1000XM5", price: 8500000, img: "https://logico.com.vn/upload_images/images/2022/05/13/wh-1000xm55(1).jpg" },
+      { id: 4, name: "Máy ảnh Canon EOS R6", price: 58000000, img: "https://cdn.vjshop.vn/may-anh/mirrorless/canon/canon-eos-r6/canon-eos-r6-info-3.jpg" },
+      { id: 5, name: "Bàn phím cơ Keychron K8", price: 2200000, img: "https://bizweb.dktcdn.net/100/329/122/files/keychron-k8-pro-01.jpg?v=1662022824441" },
+    ];
+
+    const productList = document.getElementById('productList');
+    const searchInput = document.getElementById('searchInput');
+    const notFound = document.getElementById('notFound');
+
+    function renderProducts(arr) {
+      if (arr.length === 0) {
+        notFound.style.display = 'block';
+        productList.innerHTML = '';
+        return;
+      }
+      notFound.style.display = 'none';
+      productList.innerHTML = arr.map(p => `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p class="price">${p.price.toLocaleString('vi-VN')} ₫</p>
+        </div>
+      `).join('');
+    }
+    searchInput.addEventListener('input', (e) => {
+      const term = e.target.value.trim().toLowerCase();
+      const filtered = products.filter(p => 
+        p.name.toLowerCase().includes(term) 
+      );
+      renderProducts(filtered);
+    });
+    renderProducts(products);
+  </script>
+</body>
+</html>
